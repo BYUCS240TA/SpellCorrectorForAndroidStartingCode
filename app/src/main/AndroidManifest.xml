@@ -10,7 +10,8 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true">
         <activity android:name=".MainActivity"
-            android:label="@string/mainActivityLabel">
+            android:label="@string/mainActivityLabel"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -18,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SpellCorrector"
-            android:label="@string/spellCheckerLabel">
+            android:label="@string/spellCheckerLabel"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -3,6 +3,7 @@ package cs240.byu.edu.spellcorrector_startingcode_android;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -92,26 +93,32 @@ public class SpellCorrector extends AppCompatActivity
         public void onClick(View v)
         {
             String input = searchInput.getText().toString();
-            try
+            if(input.length() < 1)
             {
-                String result = studentController.suggestSimilarWord(input);
-                StringBuilder output = new StringBuilder("The word: '");
-                if(result.equals(input))
+                Snackbar.make(findViewById(android.R.id.content), "You have to input a word first!", Snackbar.LENGTH_LONG).show();
+            }
+            else
+            {
+                try
                 {
-                    //word spelled correctly
-                    output.append(input + "' is spelled correctly!");
-                }
-                else
-                {
-                    //word not spelled correctly
-                    output.append(input + "' was not found. However, this word was found: '" + result + "'.");
-                }
-                resultDisplay.setText(output.toString());
+                    String result = studentController.suggestSimilarWord(input);
+                    StringBuilder output = new StringBuilder("The word: '");
+                    if (result.equals(input))
+                    {
+                        //word spelled correctly
+                        output.append(input + "' is spelled correctly!");
+                    } else
+                    {
+                        //word not spelled correctly
+                        output.append(input + "' was not found. However, this word was found: '" + result + "'.");
+                    }
+                    resultDisplay.setText(output.toString());
 
 
-            } catch (ISpellCorrector.NoSimilarWordFoundException e)
-            {
-                resultDisplay.setText("No similar word found!");
+                } catch (ISpellCorrector.NoSimilarWordFoundException e)
+                {
+                    resultDisplay.setText("No similar word found!");
+                }
             }
         }
     }
